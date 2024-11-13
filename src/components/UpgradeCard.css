@@ -1,0 +1,60 @@
+.upgrade-card {
+  margin: 4px;
+  width: 140px;
+  height: 140px;
+  text-align: center;
+  position: relative;
+  font-size: 12px;
+  background-color: #282829;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #ffffff;
+}
+
+.upgrade-card-info {
+  margin: 10px;
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  width: -webkit-fill-available;
+}
+
+.upgrade-card-image {
+  width: 140px;
+  height: 140px;
+  background-size: cover;
+  background-position: center;
+  margin: 0 auto;
+  /* filter: grayscale(1); */
+  z-index: 10;
+}
+
+.upgrade-card-description {
+  font-size: 12px;
+}
+.upgrade-name {
+  font-size: 12px;
+  padding: 8px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.price-tag,
+.power-tag {
+  padding: 0 6px;
+  border-radius: 24px;
+  font-size: 10px;
+  font-weight: 700;
+  z-index: 1;
+}
+.price-tag {
+  /* background-color: rgb(255, 94, 0); */
+  border: 1px solid rgb(0, 255, 64);
+  color: rgb(0, 255, 64);
+}
+.power-tag {
+  background-color: rgb(255, 242, 54);
+  color: #000;
+}

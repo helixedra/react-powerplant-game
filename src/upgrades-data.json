@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "upgradeName": "Circuit Upgrade",
+    "cost": 200,
+    "img": "l1.png",
+    "description": "Some description",
+    "upgradePower": 11
+  },
+  {
+    "id": 2,
+    "upgradeName": "Advanced Circuit Upg.",
+    "cost": 500,
+    "img": "l2.png",
+    "description": "Some description",
+    "upgradePower": 32
+  },
+  {
+    "id": 3,
+    "upgradeName": "Modern Circuit Upg.",
+    "cost": 1200,
+    "img": "l3.png",
+    "description": "Some description",
+    "upgradePower": 85
+  },
+  {
+    "id": 4,
+    "upgradeName": "Technology Upgrade",
+    "cost": 2500,
+    "img": "l4.png",
+    "description": "Some description",
+    "upgradePower": 210
+  },
+  {
+    "id": 5,
+    "upgradeName": "Extended Modules",
+    "cost": 4000,
+    "img": "l5.png",
+    "description": "Some description",
+    "upgradePower": 400
+  },
+  {
+    "id": 6,
+    "upgradeName": "Micro-Tech Upgrade",
+    "cost": 7500,
+    "img": "l6.png",
+    "description": "Some description",
+    "upgradePower": 900
+  },
+  {
+    "id": 7,
+    "upgradeName": "Nano-Tech Upgrade",
+    "cost": 14000,
+    "img": "l7.png",
+    "description": "Some description",
+    "upgradePower": 1900
+  }
+]

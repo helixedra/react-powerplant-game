@@ -1,0 +1,36 @@
+.engine-container {
+  width: 800px;
+  margin: 0 auto;
+  height: 600px;
+  background-image: url('/levels/base.png');
+}
+
+.engine {
+  width: 800px;
+  height: 600px;
+  margin: 0 auto;
+  border-radius: 30px;
+  /* background-color: rgb(173, 32, 255); */
+  cursor: pointer;
+  /* background-image: url('../assets/_00b60eb7-eb2e-4841-8322-6a16aab3c3bd.jpeg'); */
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+ul {
+  list-style-type: none;
+}
+.clickMsg {
+  font-size: 64px;
+  animation: msgFading 2s ease-out infinite;
+}
+@keyframes msgFading {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-400px);
+  }
+}
