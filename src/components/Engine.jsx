@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
-import styles from "./Engine.module.scss";
-import Button from "./ui/Button";
+import classes from './Engine.module.scss';
+import Button from './ui/Button';
+import ClickMsg from './ui/ClickMsg';
 export default function Engine({
   statClickHandler,
   upgradeEngine,
@@ -9,27 +10,17 @@ export default function Engine({
   money,
 }) {
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.engine} onClick={statClickHandler}>
-        <div className={styles.engine__container}>
-          {clickMsg.map((span) => (
-            <span
-              key={span.id}
-              style={{
-                top: span.y,
-                left: span.x,
-              }}
-              className={styles.clickMsg}
-            >
-              ⚡
-            </span>
+    <div className={classes.wrapper}>
+      <div className={classes.engine} onClick={statClickHandler}>
+        <div className={classes.engine__container}>
+          {clickMsg.map((item) => (
+            <ClickMsg x={item.x} y={item.y} key={item.id} />
           ))}
-          <div className={styles.engine__base}></div>
+          <div className={classes.engine__base}></div>
           <div
-            className={styles.engine__level}
+            className={classes.engine__level}
             title="Click to produce⚡"
-            style={{ backgroundImage: `url("/levels/${engineImg}")` }}
-          ></div>
+            style={{ backgroundImage: `url("/levels/${engineImg}")` }}></div>
         </div>
       </div>
       <Button

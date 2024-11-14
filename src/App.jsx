@@ -1,18 +1,14 @@
-import { useEffect, useState } from "react";
-import Engine from "./components/Engine";
-import Stat from "./components/Stat";
-import Upgrades from "./components/Upgrades";
-import upgradesData from "./upgrades-data.json";
+import { useEffect, useState } from 'react';
+import Engine from './components/Engine';
+import Stat from './components/Stat';
+import Upgrades from './components/Upgrades';
+import upgradesData from './upgrades-data.json';
+import GameOver from './components/GameOver';
 
 function App() {
-  // getInitialState();
-
-  // console.log(getInitialState().level);
-
   const [level, setLevel] = useState(() =>
     getInitialState().level !== null ? getInitialState().level : 1
   );
-
   const [generation, setGeneration] = useState(() =>
     getInitialState().generation !== null ? getInitialState().generation : 1
   );
@@ -23,23 +19,40 @@ function App() {
     getInitialState().produced !== null ? getInitialState().produced : 0
   );
   const [clickMsg, setClickMsg] = useState([]);
+  const [isGameOver, setIsGameOver] = useState(false);
+
+  const handleGameEnd = () => {
+    setIsGameOver(true);
+  };
+
+  const handleRestart = () => {
+    setIsGameOver(false);
+    resetGame();
+    // Reset your game state here
+  };
+
+  function resetGame() {
+    if (
+      confirm(
+        'Are you sure you want to restart this game? All progress will be lost'
+      )
+    ) {
+      localStorage.removeItem('snapshot');
+      location.reload();
+    } else {
+      return;
+    }
+  }
 
   function getInitialState() {
-    const localStorageSnapshot = localStorage.getItem("snapshot");
-
-    // console.log(JSON.parse(localStorageSnapshot));
-
+    const localStorageSnapshot = localStorage.getItem('snapshot');
     if (localStorageSnapshot) {
-      // console.log(JSON.parse(localStorageSnapshot));
-      // console.log('snapshot');
       //Calculate data from last snapshot
       const snapshot = JSON.parse(localStorageSnapshot);
-
       //Defining time snapshots
       const lastSnapshot = snapshot.timeSnapshot;
       const currentSnapshot = Date.now();
       const diffSnapshots = parseInt((currentSnapshot - lastSnapshot) / 1000); //difference between snapshots in secons
-
       //Calculating money by the difference between the last and current time snapshots
       const currentMoney = parseFloat(snapshot.money);
       const currentGeneration = parseInt(snapshot.generation);
@@ -52,11 +65,8 @@ function App() {
         generation: snapshot.generation,
         money: newMoney,
       };
-
       return newSnapshot;
     } else {
-      // console.log('no snapshot');
-
       return { level: 1, produced: 0, generation: 1, money: 0 };
     }
   }
@@ -69,7 +79,7 @@ function App() {
       money: parseFloat(money),
       timeSnapshot: Date.now(),
     };
-    localStorage.setItem("snapshot", JSON.stringify(currentSnapshot));
+    localStorage.setItem('snapshot', JSON.stringify(currentSnapshot));
   }
 
   let upgradeCost = 20; //simple upgrade
@@ -94,7 +104,6 @@ function App() {
     const rect = container.getBoundingClientRect();
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
-
     const newMsg = {
       id: Date.now(),
       x: x,
@@ -109,10 +118,6 @@ function App() {
   };
 
   function productionTime() {
-    // console.log(produced);
-    // console.log(Date.now() * 1000);
-    // console.log(generation);
-
     if (produced >= 10) {
       setProduced(0);
       const rawValue = produced / wattPerDollar;
@@ -137,16 +142,20 @@ function App() {
 
   useEffect(() => {
     const interval = setInterval(productionTime, 1000);
+    if (level >= 2) {
+      handleGameEnd();
+      return clearInterval(interval);
+    }
     return () => clearInterval(interval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [generation, money, produced]);
+  }, [generation, money, produced, level]);
 
   function upgradeEngine() {
     if (money >= upgradeCost) {
       spendMoney(upgradeCost);
       setGeneration(generation + 1);
     } else {
-      alert("Not enought money!");
+      alert('Not enought money!');
     }
   }
 
@@ -157,7 +166,7 @@ function App() {
       spendMoney(upgadeElement.cost);
       setGeneration(generation + upgadeElement.upgradePower);
     } else {
-      alert("Not enought money!");
+      alert('Not enought money!');
     }
   }
 
@@ -196,12 +205,24 @@ function App() {
 
   return (
     <>
+      {isGameOver ? (
+        <GameOver onRestart={handleRestart} />
+      ) : (
+        ''
+        // <div>
+        //   {/* Game components go here */}
+        //   <h1>Welcome to the Game!</h1>
+        //   <button onClick={handleGameEnd}>End Game</button>{' '}
+        //   {/* Placeholder for actual game end logic */}
+        // </div>
+      )}
       <header>
         <Stat
           level={level}
           generation={generation}
           money={money}
           produced={produced}
+          resetGame={resetGame}
         />
       </header>
       <main>

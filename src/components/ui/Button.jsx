@@ -1,15 +1,12 @@
-import styles from "./Button.module.scss";
+import classes from './Button.module.scss';
 
 function Button({ type, text, action, condition }) {
   const buttonClass = `button__${type}`;
-  // console.log(action);
-
   return (
     <button
-      className={`${styles.button} ${styles[buttonClass]}`}
+      className={`${classes.button} ${classes[buttonClass]}`}
       onClick={action}
-      disabled={condition}
-    >
+      disabled={condition}>
       {text}
     </button>
   );

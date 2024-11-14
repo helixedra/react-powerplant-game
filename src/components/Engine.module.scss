@@ -39,7 +39,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    background-image: url("/levels/base.png");
+    background-image: url('/levels/base.png');
   }
   &__level {
     width: 100%;
@@ -56,30 +56,4 @@
 
 ul {
   list-style-type: none;
-}
-.clickMsg {
-  font-size: 32px;
-  width: 32px;
-  height: 32px;
-  animation: msgFading 2s linear;
-  z-index: 99;
-  position: absolute;
-  pointer-events: none;
-  top: 0;
-  left: 0;
-  display: block;
-}
-@keyframes msgFading {
-  0% {
-    opacity: 0;
-    transform: translateY(0);
-  }
-  20% {
-    opacity: 1;
-    // transform: translateY(0);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(-400px);
-  }
 }

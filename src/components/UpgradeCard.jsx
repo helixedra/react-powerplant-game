@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import styles from "./UpgradeCard.module.scss";
+import classes from './UpgradeCard.module.scss';
 
 export default function UpgradeCard({
   upgradeName,
@@ -11,21 +11,19 @@ export default function UpgradeCard({
 }) {
   return (
     <div
-      className={`${styles["upgrade__card"]} ${
-        condition ? styles["disable"] : ""
+      className={`${classes['upgrade__card']} ${
+        condition ? classes['disable'] : ''
       }`}
-      onClick={upgradeExtra}
-    >
-      <div className={styles["upgrade__name"]}>{upgradeName}</div>
-      <div className={styles["upgrade__card_info"]}>
-        <div className={styles["price_tag"]}>$ {cost}</div>
-        <div className={styles["power_tag"]}>&#128498;+{upgradePower}</div>
+      onClick={upgradeExtra}>
+      <div className={classes['upgrade__name']}>{upgradeName}</div>
+      <div className={classes['upgrade__card_info']}>
+        <div className={classes['price_tag']}>💸{cost}</div>
+        <div className={classes['power_tag']}>⚡+{upgradePower}</div>
       </div>
       <div
         style={{ backgroundImage: `url("/upgrades/${img}")` }}
-        className={styles["upgrade__card_image"]}
-        alt={upgradeName}
-      ></div>
+        className={classes['upgrade__card_image']}
+        alt={upgradeName}></div>
     </div>
   );
 }

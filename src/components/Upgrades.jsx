@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
-import upgradesData from "../upgrades-data.json";
-import UpgradeCard from "./UpgradeCard";
-import styles from "./Upgrades.module.scss";
+import { useState } from 'react';
+import upgradesData from '../upgrades-data.json';
+import UpgradeCard from './UpgradeCard';
+import classes from './Upgrades.module.scss';
 export default function Upgrade({ upgradeExtra, money }) {
   const [upgradeWindow, setUpgradeWindow] = useState(false);
 
@@ -11,15 +11,14 @@ export default function Upgrade({ upgradeExtra, money }) {
   }
   return (
     <>
-      <button className={styles.upgrades_button} onClick={handleUpgradeWindow}>
-        Upgrades
+      <button className={classes.upgrades_button} onClick={handleUpgradeWindow}>
+        🚀
       </button>
       <div
-        className={`${styles.upgrades__container} ${
-          upgradeWindow ? styles.visible : ""
-        }`}
-      >
-        <div className={styles.upgrades__title}>Special Upgrades</div>
+        className={`${classes.upgrades__container} ${
+          upgradeWindow ? classes.visible : ''
+        }`}>
+        <div className={classes.upgrades__title}>Special Upgrades</div>
         {upgradesData.map((item) => (
           <UpgradeCard
             key={item.id}

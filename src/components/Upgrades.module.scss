@@ -3,32 +3,44 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 340px;
+    width: 350px;
     display: flex;
     flex-wrap: wrap;
-    padding: 2px;
-    margin: 24px;
+    padding: 24px;
+    // margin: 24px;
     transition: 0.2s ease-in-out;
     @media (max-width: 500px) {
       transform: translateX(-1000px);
+      margin-top: 80px;
+      width: 100%;
+      // background-color: #0000001c;
+      backdrop-filter: blur(20px);
       //   display: none;
     }
   }
   &__title {
     font-size: 24px;
     width: 100%;
-    margin: 24px 0;
+    // margin: 24px 0 8px 0;
     text-align: left;
   }
 }
 .upgrades_button {
   position: absolute;
-  top: 0;
+  top: 32px;
   color: white;
   left: 0;
-  background-color: #464646;
+  // background-color: #464646;
   height: 40px;
-  padding: 0 16px;
+  width: 40px;
+  line-height: 40px;
+  text-align: center;
+  background-color: #ffffff10;
+  border: 1px solid #ffffff50;
+  // padding: 0 16px;
+  margin-left: 24px;
+  z-index: 10;
+  border-radius: 50%;
 
   @media (min-width: 640px) {
     display: none;
