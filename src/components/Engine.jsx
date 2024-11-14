@@ -1,33 +1,43 @@
 /* eslint-disable react/prop-types */
-import './Engine.css';
+import styles from "./Engine.module.scss";
+import Button from "./ui/Button";
 export default function Engine({
   statClickHandler,
   upgradeEngine,
   engineImg,
   clickMsg,
+  money,
 }) {
   return (
-    <div title="Click to produce⚡">
-      <div className="engine-container">
-        {clickMsg.map((span) => (
-          <span
-            key={span.id}
-            style={{
-              position: 'absolute',
-              top: span.y,
-              left: span.x,
-              pointerEvents: 'none', // Щоб span не заважав події onClick
-            }}
-            className="clickMsg">
-            ⚡
-          </span>
-        ))}
-        <div
-          className="engine"
-          style={{ backgroundImage: `url("/levels/${engineImg}")` }}
-          onClick={statClickHandler}></div>
-        <button onClick={upgradeEngine}>⚡ Simple upgrade (cost $20)</button>
+    <div className={styles.wrapper}>
+      <div className={styles.engine} onClick={statClickHandler}>
+        <div className={styles.engine__container}>
+          {clickMsg.map((span) => (
+            <span
+              key={span.id}
+              style={{
+                top: span.y,
+                left: span.x,
+              }}
+              className={styles.clickMsg}
+            >
+              ⚡
+            </span>
+          ))}
+          <div className={styles.engine__base}></div>
+          <div
+            className={styles.engine__level}
+            title="Click to produce⚡"
+            style={{ backgroundImage: `url("/levels/${engineImg}")` }}
+          ></div>
+        </div>
       </div>
+      <Button
+        type="primary"
+        text="⚡ Simple upgrade (cost $20)"
+        action={upgradeEngine}
+        condition={parseInt(money) >= 20 ? false : true}
+      />
     </div>
   );
 }

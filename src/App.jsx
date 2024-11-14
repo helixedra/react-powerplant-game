@@ -1,9 +1,8 @@
-import { useEffect, useState } from 'react';
-import './App.css';
-import Engine from './components/Engine';
-import Stat from './components/Stat';
-import Upgrades from './components/Upgrades';
-import upgradesData from './upgrades-data.json';
+import { useEffect, useState } from "react";
+import Engine from "./components/Engine";
+import Stat from "./components/Stat";
+import Upgrades from "./components/Upgrades";
+import upgradesData from "./upgrades-data.json";
 
 function App() {
   // getInitialState();
@@ -26,7 +25,7 @@ function App() {
   const [clickMsg, setClickMsg] = useState([]);
 
   function getInitialState() {
-    const localStorageSnapshot = localStorage.getItem('snapshot');
+    const localStorageSnapshot = localStorage.getItem("snapshot");
 
     // console.log(JSON.parse(localStorageSnapshot));
 
@@ -70,7 +69,7 @@ function App() {
       money: parseFloat(money),
       timeSnapshot: Date.now(),
     };
-    localStorage.setItem('snapshot', JSON.stringify(currentSnapshot));
+    localStorage.setItem("snapshot", JSON.stringify(currentSnapshot));
   }
 
   let upgradeCost = 20; //simple upgrade
@@ -83,10 +82,6 @@ function App() {
     }
   }
 
-  function resetGame() {
-    localStorage.removeItem('snapshot');
-  }
-
   let wattPerDollar = calculateWattsPerDollar(level); // Watt per 1 Dollar
 
   function statClickHandler(event) {
@@ -95,11 +90,17 @@ function App() {
   }
 
   const generateClickMsg = (event) => {
+    const container = event.currentTarget;
+    const rect = container.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+
     const newMsg = {
-      id: Date.now(), //unique id
-      x: event.clientX,
-      y: event.clientY,
+      id: Date.now(),
+      x: x,
+      y: y,
     };
+
     setClickMsg((prevMsg) => [...prevMsg, newMsg]);
 
     setTimeout(() => {
@@ -145,7 +146,7 @@ function App() {
       spendMoney(upgradeCost);
       setGeneration(generation + 1);
     } else {
-      alert('Not enought money!');
+      alert("Not enought money!");
     }
   }
 
@@ -156,7 +157,7 @@ function App() {
       spendMoney(upgadeElement.cost);
       setGeneration(generation + upgadeElement.upgradePower);
     } else {
-      alert('Not enought money!');
+      alert("Not enought money!");
     }
   }
 
@@ -195,20 +196,24 @@ function App() {
 
   return (
     <>
-      <button onClick={resetGame}>Reset game</button>
-      <Stat
-        level={level}
-        generation={generation}
-        money={money}
-        produced={produced}
-      />
-      <Engine
-        statClickHandler={statClickHandler}
-        upgradeEngine={upgradeEngine}
-        engineImg={engineImg()}
-        clickMsg={clickMsg}
-      />
-      <Upgrades upgradeExtra={upgradeExtra} />
+      <header>
+        <Stat
+          level={level}
+          generation={generation}
+          money={money}
+          produced={produced}
+        />
+      </header>
+      <main>
+        <Engine
+          statClickHandler={statClickHandler}
+          upgradeEngine={upgradeEngine}
+          engineImg={engineImg()}
+          clickMsg={clickMsg}
+          money={money}
+        />
+        <Upgrades upgradeExtra={upgradeExtra} money={money} />
+      </main>
     </>
   );
 }
